@@ -6,6 +6,6 @@ def index(request):
     context = {}
     return render(request, "index.html", context)
 
-def aboutus(request):
-    context = {}
-    return render(request, 'aboutus.html', context)
+# def aboutus(request):
+#     context = {}
+#     return render(request, 'aboutus.html', context)
