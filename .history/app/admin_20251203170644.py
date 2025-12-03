@@ -26,7 +26,6 @@ class GeneralInfoAdmin(admin.ModelAdmin):
     #     return False ``
 
     # customize which column/label doesn't has the permission to be edited 
-    # selected labels will be non-editable in the admin panel and placed last 
     readonly_fields = [
         'email',
     ]

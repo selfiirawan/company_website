@@ -12,6 +12,3 @@ class GeneralInfo(models.Model):
     facebook_url = models.URLField(blank=True, null=True)
     instagram_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
-
-    def __str__(self):
-        return self.company_name
