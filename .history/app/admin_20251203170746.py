@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import GeneralInfo, Service
+from app.models import GeneralInfo
 
 # Register your models here.
 
@@ -29,18 +29,4 @@ class GeneralInfoAdmin(admin.ModelAdmin):
     # selected labels will be non-editable in the admin panel and placed last 
     readonly_fields = [
         'email',
-    ]
-
-
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = [
-        'id',
-        'title',
-        'description',
-    ]
-
-    search_fields = [
-        'title',
-        'description',
     ]

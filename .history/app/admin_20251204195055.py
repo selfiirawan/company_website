@@ -31,16 +31,6 @@ class GeneralInfoAdmin(admin.ModelAdmin):
         'email',
     ]
 
-
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = [
-        'id',
-        'title',
-        'description',
-    ]
-
-    search_fields = [
-        'title',
-        'description',
-    ]
+    pass
