@@ -15,11 +15,3 @@ class GeneralInfo(models.Model):
 
     def __str__(self):
         return self.company_name
-    
-class Service(models.Model):
-    icon = models.CharField(max_length=50)
-    title = models.CharField(max_length=255, unique=True)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.title
