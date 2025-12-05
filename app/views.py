@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from app.models import GeneralInfo
+from app.models import GeneralInfo, Service
 from datetime import datetime
 
 # Create your views here.
 def index(request):
     general_info = GeneralInfo.objects.first()
+
+    services = Service.objects.all()
 
     context = {
         "company_name": general_info.company_name,
@@ -17,6 +19,8 @@ def index(request):
         "facebook_url": general_info.facebook_url,
         "instagram_url": general_info.instagram_url,
         "linkedin_url": general_info.linkedin_url,
+
+        "services": services,
     }
 
     return render(request, "index.html", context)
