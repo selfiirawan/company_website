@@ -1,5 +1,10 @@
-from django.shortcuts import render
-from app.models import GeneralInfo, Service, Testimonial, FrequencyAskedQuestion
+from django.shortcuts import render, redirect
+from app.models import (
+    GeneralInfo, 
+    Service, 
+    Testimonial, 
+    FrequentlyAskedQuestion,
+)
 from datetime import datetime
 
 # Create your views here.
@@ -8,7 +13,7 @@ def index(request):
 
     services = Service.objects.all()
     testimonials = Testimonial.objects.all()
-    faqs = FrequencyAskedQuestion.objects.all()
+    faqs = FrequentlyAskedQuestion.objects.all()
 
     context = {
         "company_name": general_info.company_name,
@@ -29,6 +34,14 @@ def index(request):
 
     return render(request, "index.html", context)
 
-# def aboutus(request):
-#     context = {}
-#     return render(request, 'aboutus.html', context)
+
+def contact_form(request):
+    
+    if request.method == "POST":
+        print("\nContact form submitted\n")
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+    
+    return redirect('home')

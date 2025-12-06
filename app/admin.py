@@ -3,7 +3,7 @@ from app.models import (
     GeneralInfo, 
     Service, 
     Testimonial, 
-    FrequencyAskedQuestion,
+    FrequentlyAskedQuestion,
 )
 
 # Register your models here.
@@ -65,8 +65,8 @@ class TestimonialAdmin(admin.ModelAdmin):
     display_rating.short_description = "Rating"
 
 
-@admin.register(FrequencyAskedQuestion)
-class FrequencyAskedQuestionAdmin(admin.ModelAdmin):
+@admin.register(FrequentlyAskedQuestion)
+class FrequentlyAskedQuestionAdmin(admin.ModelAdmin):
     list_display = [
         "question",
         "answer",
