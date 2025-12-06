@@ -26,7 +26,16 @@ class Service(models.Model):
 
 class Testimonial(models.Model):
     user_image = models.CharField(max_length=255, blank=True, null=True)
-    rating = models.IntegerField()
+
+    stars_count = [
+        (1, "One"),
+        (2, "Two"),
+        (3, "Three"),
+        (4, "Four"),
+        (5, "Five"),
+    ]
+
+    rating = models.IntegerField(choices=stars_count)
     username = models.CharField(max_length=50)
     user_position = models.CharField(max_length=50)
     review = models.TextField()
