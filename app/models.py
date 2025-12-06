@@ -23,3 +23,13 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
+
+class Testimonial(models.Model):
+    user_image = models.CharField(max_length=255, blank=True, null=True)
+    rating = models.IntegerField()
+    username = models.CharField(max_length=50)
+    user_position = models.CharField(max_length=50)
+    review = models.TextField()
+
+    def __str__(self):
+        return f"{self.username} - {self.user_position}"
