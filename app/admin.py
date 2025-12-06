@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import GeneralInfo, Service
+from app.models import GeneralInfo, Service, Testimonial
 
 # Register your models here.
 
@@ -44,3 +44,17 @@ class ServiceAdmin(admin.ModelAdmin):
         'title',
         'description',
     ]
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = [
+        "username",
+        "user_position",
+        "display_rating",
+    ]
+
+    def display_rating(self, obj):
+        return "⭐" * obj.rating
+    
+    display_rating.short_description = "Rating"
