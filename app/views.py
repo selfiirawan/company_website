@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import GeneralInfo, Service, Testimonial
+from app.models import GeneralInfo, Service, Testimonial, FrequencyAskedQuestion
 from datetime import datetime
 
 # Create your views here.
@@ -8,6 +8,7 @@ def index(request):
 
     services = Service.objects.all()
     testimonials = Testimonial.objects.all()
+    faqs = FrequencyAskedQuestion.objects.all()
 
     context = {
         "company_name": general_info.company_name,
@@ -23,6 +24,7 @@ def index(request):
 
         "services": services,
         "testimonials": testimonials,
+        "faqs": faqs,
     }
 
     return render(request, "index.html", context)
