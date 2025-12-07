@@ -136,4 +136,4 @@ EMAIL_HOST = "smtp.googlemail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "sky.key135@gmail.com"
-EMAIL_HOST_PASSWORD = "wppcrylzqapxczmh" # app password from google account
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD") # app password from google account, venv/bin/activate
