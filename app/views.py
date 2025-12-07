@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.conf import settings
 from app.models import (
     GeneralInfo, 
@@ -46,9 +47,19 @@ def contact_form(request):
         subject = request.POST.get("subject")
         message = request.POST.get("message")
 
+    context = {
+        "name": name,
+        "email": email,
+        "subject": subject,
+        "message": message,
+    }
+
+    html_content = render_to_string("email.html", context)
+
     send_mail(
         subject=subject,
-        message=f"Name: {name}\nEmail: {email}\n\n{message}",
+        message=None,
+        html_message=html_content,
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[settings.EMAIL_HOST_USER],
         fail_silently=False,
