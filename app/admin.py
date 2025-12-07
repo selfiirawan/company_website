@@ -4,6 +4,7 @@ from app.models import (
     Service, 
     Testimonial, 
     FrequentlyAskedQuestion,
+    ContactFormLog,
 )
 
 # Register your models here.
@@ -70,4 +71,14 @@ class FrequentlyAskedQuestionAdmin(admin.ModelAdmin):
     list_display = [
         "question",
         "answer",
+    ]
+
+
+@admin.register(ContactFormLog)
+class ContactFormLogAdmin(admin.ModelAdmin):
+    list_display = [
+        "email",
+        "is_success",
+        "is_error",
+        "submitted_at",
     ]

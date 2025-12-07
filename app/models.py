@@ -49,3 +49,16 @@ class FrequentlyAskedQuestion(models.Model):
 
     def __str__(self):
         return self.question
+
+class ContactFormLog(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(blank=True, null=True)
+    is_success = models.BooleanField(default=False)
+    is_error = models.BooleanField(default=False)
+    error_message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.email
