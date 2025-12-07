@@ -29,6 +29,15 @@
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
 
+  <style>
+    .sticky_alert {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: Impact
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -42,12 +51,14 @@
 
   {% for message in messages %}
     {% if message.tags == "error" %}
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger alert-dismissible fade show sticky_alert" role="alert">
         {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     {% else %}
-      <div class="alert alert-success" role="alert">
+      <div class="alert alert-success alert-dismissible fade show sticky_alert" role="alert">
         {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     {% endif %}
   {% endfor %}
