@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib import messages
+from django.utils import timezone
 from django.conf import settings
 from app.models import (
     GeneralInfo, 
     Service, 
     Testimonial, 
     FrequentlyAskedQuestion,
+    ContactFormLog,
 )
 from datetime import datetime
 
@@ -57,6 +59,10 @@ def contact_form(request):
 
     html_content = render_to_string("email.html", context)
 
+    is_success = False
+    is_error = False
+    error_message = ""
+
     try:
         send_mail(
             subject=subject,
@@ -67,8 +73,22 @@ def contact_form(request):
             fail_silently=False,
         )
     except Exception as e:
+        is_error = True
+        error_message = str(e)
         messages.error(request, "An error occurred while sending the email. Please try again later.")
     else:
+        is_success = True
         messages.success(request, "Your message has been sent successfully!")
+
+    ContactFormLog.objects.create(
+        name=name,
+        email=email,
+        subject=subject,
+        message=message,
+        submitted_at=timezone.now(),
+        is_success=is_success,
+        is_error=is_error,
+        error_message=error_message,
+    )
     
     return redirect('home')
