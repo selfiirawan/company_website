@@ -50,45 +50,45 @@ def contact_form(request):
         subject = request.POST.get("subject")
         message = request.POST.get("message")
 
-    context = {
-        "name": name,
-        "email": email,
-        "subject": subject,
-        "message": message,
-    }
+        context = {
+            "name": name,
+            "email": email,
+            "subject": subject,
+            "message": message,
+        }
 
-    html_content = render_to_string("email.html", context)
+        html_content = render_to_string("email.html", context)
 
-    is_success = False
-    is_error = False
-    error_message = ""
+        is_success = False
+        is_error = False
+        error_message = ""
 
-    try:
-        send_mail(
+        try:
+            send_mail(
+                subject=subject,
+                message=None,
+                html_message=html_content,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+        except Exception as e:
+            is_error = True
+            error_message = str(e)
+            messages.error(request, "An error occurred while sending the email. Please try again later.")
+        else:
+            is_success = True
+            messages.success(request, "Your message has been sent successfully!")
+
+        ContactFormLog.objects.create(
+            name=name,
+            email=email,
             subject=subject,
-            message=None,
-            html_message=html_content,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[settings.EMAIL_HOST_USER],
-            fail_silently=False,
+            message=message,
+            submitted_at=timezone.now(),
+            is_success=is_success,
+            is_error=is_error,
+            error_message=error_message,
         )
-    except Exception as e:
-        is_error = True
-        error_message = str(e)
-        messages.error(request, "An error occurred while sending the email. Please try again later.")
-    else:
-        is_success = True
-        messages.success(request, "Your message has been sent successfully!")
-
-    ContactFormLog.objects.create(
-        name=name,
-        email=email,
-        subject=subject,
-        message=message,
-        submitted_at=timezone.now(),
-        is_success=is_success,
-        is_error=is_error,
-        error_message=error_message,
-    )
     
     return redirect('home')
