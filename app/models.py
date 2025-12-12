@@ -64,11 +64,19 @@ class ContactFormLog(models.Model):
     def __str__(self):
         return self.email
 
+class Author(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    country = models.CharField(max_length=100)
+    joined_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.first_name
+
 class Blog(models.Model):
     image = models.CharField(max_length=255, blank=True, null=True)
     category = models.CharField(max_length=100, blank=True, null=True)
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=100)
     created_at = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 

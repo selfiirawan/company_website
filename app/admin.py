@@ -97,7 +97,6 @@ class ContactFormLogAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = [
-        "author",
         "category",
         "title",
         "image",
