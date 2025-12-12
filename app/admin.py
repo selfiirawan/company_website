@@ -5,6 +5,7 @@ from app.models import (
     Testimonial, 
     FrequentlyAskedQuestion,
     ContactFormLog,
+    Blog,
 )
 
 # Register your models here.
@@ -91,3 +92,14 @@ class ContactFormLogAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+    
+
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = [
+        "author",
+        "category",
+        "title",
+        "image",
+        "created_at",
+    ]
