@@ -77,7 +77,12 @@ class Blog(models.Model):
     image = models.CharField(max_length=255, blank=True, null=True)
     category = models.CharField(max_length=100, blank=True, null=True)
     title = models.CharField(max_length=255)
+
     author = models.ForeignKey(Author, on_delete=models.PROTECT, blank=True, null=True)
+    # on_delete=models.CASCADE - if author is deleted, all their blogs also get deleted
+    # on_delete=models.PROTECT - prevent deletion of author if they have blogs
+    # on_delete=models.SET_NULL - set author to null if deleted
+
     created_at = models.DateTimeField(default=timezone.now)
     content = models.TextField()
 
