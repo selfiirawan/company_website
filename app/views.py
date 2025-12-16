@@ -102,9 +102,12 @@ def contact_form(request):
 def blog_detail(request, blog_id):
 
     blog = Blog.objects.get(id=blog_id)
+    recent_blogs = Blog.objects.all().exclude(id=blog.id).order_by("-created_at")[:2]
+
 
     context = {
         "blog": blog,
+        "recent_blogs": recent_blogs,
     }
 
     return render(request, "blog_details.html", context)
