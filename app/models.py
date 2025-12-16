@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from ckeditor.fields import RichTextField 
 
 # Create your models here.
 class GeneralInfo(models.Model):
@@ -84,7 +85,7 @@ class Blog(models.Model):
     # on_delete=models.SET_NULL - set author to null if deleted
 
     created_at = models.DateTimeField(default=timezone.now)
-    content = models.TextField()
+    content = RichTextField()
 
     def __str__(self):
         return self.title
